@@ -1,4 +1,4 @@
-import { link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import React from "react";
 
@@ -16,7 +16,7 @@ const Public = () => {
         </p>
       </main>
       <footer>
-        <link to="/login">Login Page</link>
+        <Link to="/login">Login Page</Link>
       </footer>
     </section>
   );
