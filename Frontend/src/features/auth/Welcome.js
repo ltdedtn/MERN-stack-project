@@ -14,7 +14,7 @@ const Welcome = () => {
         <Link to="/dash/notes">View techNotes</Link>
       </p>
       <p>
-        <Link to="/dash/notes">View techNotes</Link>
+        <Link to="/dash/users">View Users</Link>
       </p>
     </section>
   );
