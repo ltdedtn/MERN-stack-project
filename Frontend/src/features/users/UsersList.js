@@ -9,7 +9,36 @@ const UsersList = () => {
     error,
   } = useGetUsersQuery();
 
-  return <h1>UsersList</h1>;
+  let content;
+  if (isLoading) {
+    content = <div className="loader">Loading...</div>;
+  }
+  if (isError) {
+    content = (
+      <p className={isError ? "errmsg" : "offscreen"}>{error?.data?.message}</p>
+    );
+  }
+
+  if (isSuccess) {
+    const { ids } = users;
+
+    const tableContent = ids?.length
+      ? ids.map((userId) => <User key={userId} userId={userId} />)
+      : null;
+    content = (
+      <table className="table table--users">
+        <thead className="table__thead">
+          <tr>
+            <th scope="col" className="table__th user_username">Username</th>
+            <th scope="col" className="table__th user_roles">Roles</th>
+            <th scope="col" className="table__th user_edit">Edit</th>
+          </tr>
+        </thead>
+        <tbody>{tableContent}</tbody>
+      </table>
+    );
+    );
+  }
 };
 
 export default UsersList;
