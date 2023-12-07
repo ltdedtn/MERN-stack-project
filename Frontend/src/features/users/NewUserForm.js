@@ -83,7 +83,7 @@ const NewUserForm = () => {
         <label className="form__label" htmlFor="username">
           Username: <span className="nowrap">[3-30 Letters]</span>
         </label>
-        <br></br>
+        <br />
         <input
           className={`form__input ${validUserClass}`}
           type="text"
@@ -94,15 +94,15 @@ const NewUserForm = () => {
           autoComplete="off"
           placeholder="Username"
         />
-        <br></br>
-        <br></br>
+        <br />
+        <br />
         <label className="form__label" htmlFor="password">
           Password:{" "}
           <span className="nowrap">
             [6-30 Letters, must include lower and uppercase also one of these
             characters !@#$%^&*]
           </span>
-          <br></br>
+          <br />
         </label>
         <input
           className={`form__input ${validPasswordClass}`}
@@ -113,8 +113,31 @@ const NewUserForm = () => {
           onChange={onPasswordChanged}
           autoComplete="off"
           placeholder="Password"
-        ></input>
+        ></input>{" "}
+        <br />
+        <label className="form__lable" htmlFor="roles">
+          ASSIGNED ROLES:
+        </label>
+        <br />
+        <select
+          className={`form__input ${validRolesClass}`}
+          id="roles"
+          name="roles"
+          multiple={true}
+          value={roles}
+          onChange={onRolesChanged}
+        >
+          {options}
+        </select>
       </form>
+      <button
+        className="form__button"
+        type="submit"
+        onClick={onSaveUserClicked}
+        disabled={!canSave}
+      >
+        Create User
+      </button>
     </>
   );
   return content;
