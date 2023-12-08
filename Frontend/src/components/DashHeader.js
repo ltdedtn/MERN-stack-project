@@ -39,10 +39,10 @@ const DashHeader = () => {
               checked={theme === "light" ? false : true}
             />
             <h2 alt="dark" className="w-8 h-8 swap-off">
-              Dark
+              Set Dark
             </h2>
             <h2 alt="light" className="w-8 h-8 swap-on">
-              Light
+              Set Light
             </h2>
           </label>
         </button>
