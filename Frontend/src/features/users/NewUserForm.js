@@ -131,7 +131,7 @@ const NewUserForm = () => {
         </select>
       </form>
       <button
-        className="form__button"
+        className="btn btn-primary"
         type="submit"
         onClick={onSaveUserClicked}
         disabled={!canSave}
