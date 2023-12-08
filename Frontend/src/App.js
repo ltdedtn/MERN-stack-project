@@ -13,29 +13,31 @@ import NewNote from "./features/notes/NewNote";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Public />} />
-        <Route path="/login" element={<Login />} />
-        {/* /dash is the parent route for all the dashboard routes */}
+    <div className="h-full min-h-full">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Public />} />
+          <Route path="/login" element={<Login />} />
+          {/* /dash is the parent route for all the dashboard routes */}
 
-        <Route path="/dash" element={<DashLayout />}>
-          <Route index element={<Welcome />} />
+          <Route path="/dash" element={<DashLayout />}>
+            <Route index element={<Welcome />} />
 
-          <Route path="users">
-            <Route index element={<UsersList />} />
-            <Route path="new" element={<NewUserForm />} />
-            <Route path=":userId" element={<EditUser />} />
-          </Route>
+            <Route path="users">
+              <Route index element={<UsersList />} />
+              <Route path="new" element={<NewUserForm />} />
+              <Route path=":userId" element={<EditUser />} />
+            </Route>
 
-          <Route path="notes">
-            <Route index element={<NotesList />} />
-            <Route path="new" element={<NewNote />} />
-            <Route path=":noteId" element={<EditNote />} />
+            <Route path="notes">
+              <Route index element={<NotesList />} />
+              <Route path="new" element={<NewNote />} />
+              <Route path=":noteId" element={<EditNote />} />
+            </Route>
           </Route>
         </Route>
-      </Route>
-    </Routes>
+      </Routes>
+    </div>
   );
 }
 

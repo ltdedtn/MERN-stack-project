@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAddNewUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { ROLES } from "../../config/roles";
 
 const USER_REGEX = /^[a-zA-Z0-9]{3,30}$/;
@@ -71,73 +69,65 @@ const NewUserForm = () => {
   const content = (
     <>
       <p className={errClass}>{error?.data?.message}</p>
-      <form>
-        <div className="form" onSubmit={onSaveUserClicked}>
-          <h2>New User</h2>
-          <div className="form__action-buttons">
-            <button className="icon-button" title="Save" disabled={!canSave}>
-              <FontAwesomeIcon icon={faSave} />
-            </button>
-          </div>
+      <div class="relative flex flex-col justify-center h-screen overflow-hidden">
+        <div class="w-full p-6 m-auto bg-grey rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
+          <form className="space-y-4">
+            <div className="form" onSubmit={onSaveUserClicked}>
+              <h2>New User</h2>
+            </div>
+            <label className="label" htmlFor="username">
+              Username:
+            </label>
+            <input
+              className={`w-full input input-bordered ${validUserClass}`}
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={onUsernameChanged}
+              autoComplete="off"
+              placeholder="Username"
+            />
+            <label className="label" htmlFor="password">
+              Password: <span className="nowrap"></span>
+            </label>
+            <input
+              className={`w-full input input-bordered ${validPasswordClass}`}
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={onPasswordChanged}
+              autoComplete="off"
+              placeholder="Password"
+            ></input>{" "}
+            <label className="lable" htmlFor="roles">
+              ASSIGNED ROLES:
+            </label>
+            <br />
+            <select
+              className={`form__input ${validRolesClass}`}
+              id="roles"
+              name="roles"
+              multiple={true}
+              value={roles}
+              onChange={onRolesChanged}
+            >
+              {options}
+            </select>
+            <div>
+              <button
+                class="btn btn-block"
+                type="submit"
+                onClick={onSaveUserClicked}
+                disabled={!canSave}
+              >
+                Sign Up
+              </button>
+            </div>
+          </form>
         </div>
-        <label className="form__label" htmlFor="username">
-          Username: <span className="nowrap">[3-30 Letters]</span>
-        </label>
-        <br />
-        <input
-          className={`form__input ${validUserClass}`}
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={onUsernameChanged}
-          autoComplete="off"
-          placeholder="Username"
-        />
-        <br />
-        <br />
-        <label className="form__label" htmlFor="password">
-          Password:{" "}
-          <span className="nowrap">
-            [6-30 Letters, must include lower and uppercase also one of these
-            characters !@#$%^&*]
-          </span>
-          <br />
-        </label>
-        <input
-          className={`form__input ${validPasswordClass}`}
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={onPasswordChanged}
-          autoComplete="off"
-          placeholder="Password"
-        ></input>{" "}
-        <br />
-        <label className="form__lable" htmlFor="roles">
-          ASSIGNED ROLES:
-        </label>
-        <br />
-        <select
-          className={`form__input ${validRolesClass}`}
-          id="roles"
-          name="roles"
-          multiple={true}
-          value={roles}
-          onChange={onRolesChanged}
-        >
-          {options}
-        </select>
-      </form>
-      <button
-        className="btn btn-primary"
-        type="submit"
-        onClick={onSaveUserClicked}
-        disabled={!canSave}
-      >
-        Create User
-      </button>
+      </div>
     </>
   );
   return content;

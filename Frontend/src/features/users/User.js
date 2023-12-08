@@ -17,10 +17,10 @@ const User = ({ userId }) => {
 
     return (
       <>
-        <tr className="table__row user">
-          <td className={`text-3xl ${cellStatus}`}>{user.username}</td>
-          <td className={`table__cell ${cellStatus}`}>{userRolesString}</td>
-          <td className={`table__cell ${cellStatus}`}>
+        <tr>
+          <td className={` ${cellStatus}`}>{user.username}</td>
+          <td className={` ${cellStatus}`}>{userRolesString}</td>
+          <td className={` ${cellStatus}`}>
             <button className="icon-button table__button" onClick={handleEdit}>
               <FontAwesomeIcon icon={faPenToSquare} />
             </button>
