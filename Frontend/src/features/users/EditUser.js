@@ -5,14 +5,15 @@ import EditUserForm from "./EditUserForm";
 
 const EditUser = () => {
   const { id } = useParams();
+
   const user = useSelector((state) => selectUserById(state, id));
+
   const content = user ? (
     <EditUserForm user={user} />
   ) : (
-    <div>User not found</div>
+    <p>Could not find user</p>
   );
 
   return content;
 };
-
 export default EditUser;
