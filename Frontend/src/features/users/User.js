@@ -12,25 +12,22 @@ const User = ({ userId }) => {
 
   if (user) {
     const handleEdit = () => navigate(`/dash/users/${userId}`);
+
     const userRolesString = user.roles.toString().replaceAll(",", ", ");
-    const cellStatus = user.active ? "" : "table_cell--inactive";
+
+    const cellStatus = user.active ? "" : "table__cell--inactive";
 
     return (
-      <>
-        <tr>
-          <td className={` ${cellStatus}`}>{user.username}</td>
-          <td className={` ${cellStatus}`}>{userRolesString}</td>
-          <td className={` ${cellStatus}`}>
-            <button className="icon-button table__button" onClick={handleEdit}>
-              <FontAwesomeIcon icon={faPenToSquare} />
-            </button>
-          </td>
-        </tr>
-      </>
+      <tr className="table__row user">
+        <td className={` ${cellStatus}`}>{user.username}</td>
+        <td className={` ${cellStatus}`}>{userRolesString}</td>
+        <td className={` ${cellStatus}`}>
+          <button className="icon-button table__button" onClick={handleEdit}>
+            <FontAwesomeIcon icon={faPenToSquare} />
+          </button>
+        </td>
+      </tr>
     );
-  } else {
-    return null;
-  }
+  } else return null;
 };
-
 export default User;

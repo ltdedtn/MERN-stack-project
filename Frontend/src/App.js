@@ -28,13 +28,13 @@ function App() {
               <Route path="users">
                 <Route index element={<UsersList />} />
                 <Route path="new" element={<NewUserForm />} />
-                <Route path=":userId" element={<EditUser />} />
+                <Route path=":id" element={<EditUser />} />
               </Route>
 
               <Route path="notes">
                 <Route index element={<NotesList />} />
                 <Route path="new" element={<NewNote />} />
-                <Route path=":noteId" element={<EditNote />} />
+                <Route path=":id" element={<EditNote />} />
               </Route>
             </Route>
           </Route>
