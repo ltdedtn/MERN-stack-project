@@ -62,9 +62,15 @@ const EditUserForm = ({ user }) => {
       await updateUser({ id: user.id, username, roles, active });
     }
   };
+
   const onDeleteUserClicked = async () => {
-    await deleteUser(user.id);
+    try {
+      await deleteUser(user.id);
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
   };
+
   const options = Object.values(ROLES).map((role) => {
     return (
       <option key={role} value={role}>
@@ -73,6 +79,7 @@ const EditUserForm = ({ user }) => {
       </option>
     );
   });
+
   let canSave;
   if (password) {
     canSave =
@@ -91,20 +98,12 @@ const EditUserForm = ({ user }) => {
   const content = (
     <>
       <p className={errClass}>{errorContent}</p>
-      <div class="relative flex flex-col justify-center h-screen overflow-hidden">
-        <div class="w-full p-6 m-auto bg-grey rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
+      <div className="relative flex flex-col justify-center h-screen overflow-hidden">
+        <div className="w-full p-6 m-auto bg-grey rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
           <form className="space-y-4">
             <div>
               <h2>Edit User</h2>
               <div className="">
-                <div
-                  className="form"
-                  title="Save"
-                  onClick={onSaveUserClicked}
-                  disabled={!canSave}
-                >
-                  <h2>Save</h2>
-                </div>
                 <button
                   className="btn btn-error"
                   title="Delete"
@@ -167,7 +166,7 @@ const EditUserForm = ({ user }) => {
             </select>
             <div>
               <button
-                class="btn btn-block"
+                className="form btn btn-block"
                 type="submit"
                 onClick={onSaveUserClicked}
                 disabled={!canSave}
