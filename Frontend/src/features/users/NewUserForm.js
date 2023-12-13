@@ -15,6 +15,7 @@ const NewUserForm = () => {
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
   const [roles, setRoles] = useState(["User"]);
+  const [selectedRole, setSelectedRole] = useState("User");
 
   useEffect(() => {
     setValidUsername(USER_REGEX.test(username));
@@ -41,6 +42,11 @@ const NewUserForm = () => {
       (option) => option.value
     );
     setRoles(values);
+  };
+  const handleRoleSelection = (e) => {
+    const selectedRole = e.target.value;
+    setSelectedRole(selectedRole);
+    setRoles([selectedRole]);
   };
 
   const canSave =
@@ -105,19 +111,33 @@ const NewUserForm = () => {
               ASSIGNED ROLES:
             </label>
             <br />
-            <select
-              className={`form__input ${validRolesClass}`}
-              id="roles"
-              name="roles"
-              multiple={true}
-              value={roles}
-              onChange={onRolesChanged}
-            >
-              {options}
-            </select>
+            <div className="dropdown dropdown-right">
+              <div tabIndex="0" role="button" className="btn m-1">
+                {roles ? roles : "Select a Role"}
+              </div>
+              <ul
+                tabIndex="0"
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                {options.map((role) => (
+                  <li
+                    key={role}
+                    onClick={handleRoleSelection}
+                    className={`${validRolesClass}`}
+                    id="roles"
+                    name="roles"
+                    multiple={true}
+                    value={roles}
+                    onChange={onRolesChanged}
+                  >
+                    {role}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <div>
               <button
-                class="btn btn-block"
+                className="btn btn-block"
                 type="submit"
                 onClick={onSaveUserClicked}
                 disabled={!canSave}
