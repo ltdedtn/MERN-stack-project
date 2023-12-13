@@ -7,8 +7,7 @@ const USER_REGEX = /^[a-zA-Z0-9]{3,30}$/;
 const PASSWORD_REGEX = /^[a-zA-Z0-9!@#$%^&*]{6,30}$/;
 
 const EditUserForm = ({ user }) => {
-  const [updateUser, { isLoading, isSuccess, isError, error }] =
-    useUpdateUserMutation();
+  const [updateUser, { isSuccess, isError, error }] = useUpdateUserMutation();
 
   const [
     deleteUser,
@@ -66,6 +65,7 @@ const EditUserForm = ({ user }) => {
   const onDeleteUserClicked = async () => {
     try {
       await deleteUser(user.id);
+      navigate("/dash"); // Reroute back to the dashboard
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -79,14 +79,6 @@ const EditUserForm = ({ user }) => {
       </option>
     );
   });
-
-  let canSave;
-  if (password) {
-    canSave =
-      [roles.length, validUsername, validPassword].every(Boolean) && !isLoading;
-  } else {
-    canSave = [roles.length, validUsername].every(Boolean) && !isLoading;
-  }
 
   const errClass = isError || isDelError ? "errmsg" : "offscreen";
   const validUserClass = !validUsername ? "" : "error";
@@ -103,15 +95,6 @@ const EditUserForm = ({ user }) => {
           <form className="space-y-4">
             <div>
               <h2>Edit User</h2>
-              <div className="">
-                <button
-                  className="btn btn-error"
-                  title="Delete"
-                  onClick={onDeleteUserClicked}
-                >
-                  Delete
-                </button>
-              </div>
             </div>
             <label className="label" htmlFor="username">
               Username:
@@ -164,14 +147,21 @@ const EditUserForm = ({ user }) => {
             >
               {options}
             </select>
+            <br />
+            <button
+              className="btn btn-error"
+              title="Delete"
+              onClick={onDeleteUserClicked}
+            >
+              Delete
+            </button>
             <div>
               <button
                 className="form btn btn-block"
-                type="submit"
+                title="Update"
                 onClick={onSaveUserClicked}
-                disabled={!canSave}
               >
-                Sign Up
+                Update
               </button>
             </div>
           </form>
