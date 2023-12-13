@@ -62,13 +62,9 @@ const EditUserForm = ({ user }) => {
     }
   };
 
-  const onDeleteUserClicked = async () => {
-    try {
-      await deleteUser(user.id);
-      navigate("/dash"); // Reroute back to the dashboard
-    } catch (error) {
-      console.error("Error deleting user:", error);
-    }
+  const onDeleteUserClicked = async (e) => {
+    e.preventDefault();
+    await deleteUser(user.id);
   };
 
   const options = Object.values(ROLES).map((role) => {
