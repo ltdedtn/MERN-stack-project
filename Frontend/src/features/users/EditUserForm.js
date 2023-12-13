@@ -91,14 +91,13 @@ const EditUserForm = ({ user }) => {
   const errorContent = (error?.data?.message || delerror?.data?.message) ?? "";
 
   const content = (
-    <>
-      <p className={errClass}>{errorContent}</p>
-      <div className="relative flex flex-col justify-center h-screen overflow-hidden">
-        <div className="w-full p-6 m-auto bg-grey rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
-          <form className="space-y-4">
-            <div>
-              <h2>Edit User</h2>
-            </div>
+    <div className="pt-8 relative flex flex-col justify-center">
+      <div className="p-6 m-auto bg-grey rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
+        <form className="space-y-4">
+          <div>
+            <h2>Edit User</h2>
+          </div>
+          <div>
             <label className="label" htmlFor="username">
               Username:
             </label>
@@ -112,6 +111,8 @@ const EditUserForm = ({ user }) => {
               autoComplete="off"
               placeholder={user.username}
             />
+          </div>
+          <div>
             <label className="label" htmlFor="password">
               Password: <span className="nowrap"></span>
             </label>
@@ -124,11 +125,14 @@ const EditUserForm = ({ user }) => {
               onChange={onPasswordChanged}
               autoComplete="off"
               placeholder="Password"
-            ></input>{" "}
+            ></input>
+          </div>
+
+          <div>
             <label className="label " htmlFor="user-active">
               ACTIVE:
               <input
-                className="checkbox"
+                className="toggle toggle-success"
                 id="user-active"
                 name="user-active"
                 type="checkbox"
@@ -136,55 +140,74 @@ const EditUserForm = ({ user }) => {
                 onChange={onActiveChanged}
               />
             </label>
-            <label className="lable" htmlFor="roles">
-              Current Role:
-            </label>
-            <br />
-            <div className="dropdown dropdown-right">
-              <div tabIndex="0" role="button" className="btn m-1">
-                {roles ? roles : "Select a Role"}
-              </div>
-              <ul
-                tabIndex="0"
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-              >
-                {options.map((role) => (
-                  <li
-                    key={role}
-                    onClick={handleRoleSelection}
-                    className={`${validRolesClass}`}
-                    id="roles"
-                    name="roles"
-                    multiple={true}
-                    value={roles}
-                    onChange={onRolesChanged}
-                  >
-                    {role}
-                  </li>
-                ))}
-              </ul>
+          </div>
+          <label className="lable" htmlFor="roles">
+            Current Role:
+          </label>
+          <div className="dropdown dropdown-right">
+            <div tabIndex="0" role="button" className="btn m-1">
+              {roles ? (
+                <div className="relative">
+                  <div className="flex items-center justify-between">
+                    <span>{roles}</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 ml-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 011.414-1.414L10 9.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              ) : (
+                "Select a Role"
+              )}
             </div>
-            <br />
-            <button
-              className="btn btn-error btn-block"
-              title="Delete"
-              onClick={onDeleteUserClicked}
+            <ul
+              tabIndex="0"
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
             >
-              Delete
+              {options.map((role) => (
+                <li
+                  key={role}
+                  onClick={handleRoleSelection}
+                  className={`${validRolesClass}`}
+                  id="roles"
+                  name="roles"
+                  multiple={true}
+                  value={roles}
+                  onChange={onRolesChanged}
+                >
+                  {role}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <br />
+          <button
+            className="btn btn-error btn-block"
+            title="Delete"
+            onClick={onDeleteUserClicked}
+          >
+            Delete
+          </button>
+          <div>
+            <button
+              className="form btn btn-primary btn-block"
+              title="Update"
+              onClick={onSaveUserClicked}
+            >
+              Update
             </button>
-            <div>
-              <button
-                className="form btn btn-block"
-                title="Update"
-                onClick={onSaveUserClicked}
-              >
-                Update
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
   return content;
 };

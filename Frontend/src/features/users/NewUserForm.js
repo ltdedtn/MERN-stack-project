@@ -67,7 +67,11 @@ const NewUserForm = () => {
 
   const errClass = isError ? "errmsg" : "offscreen";
   const validUserClass = !validUsername ? "form__input--incomplete" : "";
-  const validPasswordClass = !validPassword ? "form__input--incomplete" : "";
+  const validPasswordClass = !validPassword
+    ? "form__input--incomplete"
+    : validPassword
+    ? "form__input--complete"
+    : "";
   const validRolesClass = !Boolean(roles.length)
     ? "form__input--incomplete"
     : "";
@@ -75,45 +79,68 @@ const NewUserForm = () => {
   const content = (
     <>
       <p className={errClass}>{error?.data?.message}</p>
-      <div class="relative flex flex-col justify-center h-screen overflow-hidden">
-        <div class="w-full p-6 m-auto bg-grey rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
+      <div className="pt-8 relative flex flex-col justify-center">
+        <div className="p-6 m-auto bg-grey rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
           <form className="space-y-4">
             <div className="form" onSubmit={onSaveUserClicked}>
               <h2>New User</h2>
             </div>
-            <label className="label" htmlFor="username">
-              Username:
-            </label>
-            <input
-              className={`w-full input input-bordered ${validUserClass}`}
-              type="text"
-              id="username"
-              name="username"
-              value={username}
-              onChange={onUsernameChanged}
-              autoComplete="off"
-              placeholder="Username"
-            />
-            <label className="label" htmlFor="password">
-              Password: <span className="nowrap"></span>
-            </label>
-            <input
-              className={`w-full input input-bordered ${validPasswordClass}`}
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={onPasswordChanged}
-              autoComplete="off"
-              placeholder="Password"
-            ></input>{" "}
+            <div>
+              <label className="label" htmlFor="username">
+                Username:
+              </label>
+              <input
+                className={`w-full input input-bordered ${validUserClass}`}
+                type="text"
+                id="username"
+                name="username"
+                value={username}
+                onChange={onUsernameChanged}
+                autoComplete="off"
+                placeholder="Username"
+              />
+            </div>
+            <div>
+              <label className="label" htmlFor="password">
+                Password: <span className="nowrap"></span>
+              </label>
+              <input
+                className={`w-full input input-bordered ${validPasswordClass}`}
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={onPasswordChanged}
+                autoComplete="off"
+                placeholder="Password"
+              ></input>{" "}
+            </div>
             <label className="lable" htmlFor="roles">
               ASSIGNED ROLES:
             </label>
-            <br />
             <div className="dropdown dropdown-right">
               <div tabIndex="0" role="button" className="btn m-1">
-                {roles ? roles : "Select a Role"}
+                {roles ? (
+                  <div className="relative">
+                    <div className="flex items-center justify-between">
+                      <span>{roles}</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 ml-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 011.414-1.414L10 9.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                ) : (
+                  "Select a Role"
+                )}
               </div>
               <ul
                 tabIndex="0"

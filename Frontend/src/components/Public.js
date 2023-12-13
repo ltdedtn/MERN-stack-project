@@ -17,6 +17,7 @@ const Public = () => {
       </main>
       <footer>
         <Link to="/login">Login Page</Link>
+        <Link to="dash/users/new">Dont have an account?</Link>
       </footer>
     </section>
   );
