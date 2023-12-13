@@ -11,10 +11,10 @@ const Welcome = () => {
         <Link to="/dash/users/new">Create a new User</Link>
       </p>
       <p>
-        <Link to="/dash/notes">View techNotes</Link>
+        <Link to="/dash/notes">View Notes</Link>
       </p>
       <p>
-        <Link to="/dash/notes/new">Create a new techNote</Link>
+        <Link to="/dash/notes/new">Create a new Note</Link>
       </p>
     </>
   );
