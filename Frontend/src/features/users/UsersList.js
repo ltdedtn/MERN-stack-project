@@ -42,6 +42,9 @@ const UsersList = () => {
             <th scope="col" className="table__th user__edit">
               Edit
             </th>
+            <th scope="col" className="table__th user__delete">
+              Delete
+            </th>
           </tr>
         </thead>
         <tbody>{tableContent}</tbody>

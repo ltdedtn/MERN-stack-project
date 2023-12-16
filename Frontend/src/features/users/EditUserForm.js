@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useUpdateUserMutation, useDeleteUserMutation } from "./usersApiSlice";
+import { useUpdateUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../config/roles";
 
@@ -8,11 +8,6 @@ const PASSWORD_REGEX = /^[a-zA-Z0-9!@#$%^&*]{6,30}$/;
 
 const EditUserForm = ({ user }) => {
   const [updateUser, { isSuccess, isError, error }] = useUpdateUserMutation();
-
-  const [
-    deleteUser,
-    { isSuccess: isDelSuccess, isError: isDelError, error: delerror },
-  ] = useDeleteUserMutation();
 
   const navigate = useNavigate();
 
@@ -33,13 +28,13 @@ const EditUserForm = ({ user }) => {
 
   useEffect(() => {
     console.log(isSuccess);
-    if (isSuccess || isDelSuccess) {
+    if (isSuccess) {
       setUsername("");
       setPassword("");
       setRoles([]);
       navigate("/dash/users");
     }
-  }, [isSuccess, isDelSuccess, navigate]);
+  }, [isSuccess, navigate]);
 
   const onUsernameChanged = (e) => setUsername(e.target.value);
   const onPasswordChanged = (e) => setPassword(e.target.value);
@@ -68,11 +63,6 @@ const EditUserForm = ({ user }) => {
     }
   };
 
-  const onDeleteUserClicked = async (e) => {
-    e.preventDefault();
-    await deleteUser(user.id);
-  };
-
   const options = Object.values(ROLES).map((role) => {
     return (
       <option key={role} value={role}>
@@ -82,12 +72,12 @@ const EditUserForm = ({ user }) => {
     );
   });
 
-  const errClass = isError || isDelError ? "errmsg" : "offscreen";
+  const errClass = isError ? "errmsg" : "offscreen";
   const validUserClass = !validUsername ? "" : "error";
   const validPasswordClass = !validPassword ? "" : "error";
   const validRolesClass = !Boolean(roles.length) ? "" : "error";
 
-  const errorContent = (error?.data?.message || delerror?.data?.message) ?? "";
+  const errorContent = error?.data?.message ?? "";
 
   const content =
     ((<p className={errClass}>{errorContent}</p>),
@@ -190,13 +180,6 @@ const EditUserForm = ({ user }) => {
               </ul>
             </div>
             <br />
-            <button
-              className="btn btn-error btn-block"
-              title="Delete"
-              onClick={onDeleteUserClicked}
-            >
-              Delete
-            </button>
             <div>
               <button
                 className="form btn btn-primary btn-block"
