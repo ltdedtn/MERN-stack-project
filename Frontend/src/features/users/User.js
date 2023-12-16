@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useDeleteUserMutation } from "./usersApiSlice";
 import { useSelector } from "react-redux";
@@ -33,8 +31,8 @@ const User = ({ userId }) => {
         <td className={` ${cellStatus}`}>{user.username}</td>
         <td className={` ${cellStatus}`}>{userRolesString}</td>
         <td className={` ${cellStatus}`}>
-          <button className="icon-button table__button" onClick={handleEdit}>
-            <FontAwesomeIcon icon={faPenToSquare} />
+          <button className="btn btn-neutral" onClick={handleEdit}>
+            Update
           </button>
         </td>
         <td className={` ${cellStatus}`}>
