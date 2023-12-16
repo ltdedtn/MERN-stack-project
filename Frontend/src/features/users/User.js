@@ -18,7 +18,7 @@ const User = ({ userId }) => {
     const cellStatus = user.active ? "" : "table__cell--inactive";
 
     return (
-      <tr className="table__row user">
+      <tr key={user.id} className="table__row user">
         <td className={` ${cellStatus}`}>{user.username}</td>
         <td className={` ${cellStatus}`}>{userRolesString}</td>
         <td className={` ${cellStatus}`}>

@@ -15,7 +15,6 @@ const NewUserForm = () => {
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
   const [roles, setRoles] = useState(["User"]);
-  const [selectedRole, setSelectedRole] = useState("User");
 
   useEffect(() => {
     setValidUsername(USER_REGEX.test(username));
@@ -36,17 +35,11 @@ const NewUserForm = () => {
 
   const onUsernameChanged = (e) => setUsername(e.target.value);
   const onPasswordChanged = (e) => setPassword(e.target.value);
-  const onRolesChanged = (e) => {
-    const values = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    setRoles(values);
-  };
+
   const handleRoleSelection = (e) => {
-    const selectedRole = e.target.value;
-    setSelectedRole(selectedRole);
-    setRoles([selectedRole]);
+    const roles = e.target.value;
+    setRoles(roles);
+    setRoles([roles]);
   };
 
   const canSave =
@@ -155,7 +148,7 @@ const NewUserForm = () => {
                     name="roles"
                     multiple={true}
                     value={roles}
-                    onChange={onRolesChanged}
+                    onChange={handleRoleSelection}
                   >
                     {role}
                   </li>

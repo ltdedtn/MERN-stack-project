@@ -1,13 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useGetUsersQuery } from "../users/usersApiSlice";
+
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [validUser, setValidUser] = useState(false);
-
   const content = (
     <>
       <div className="pt-8 relative flex flex-col justify-center">

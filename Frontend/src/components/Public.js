@@ -4,7 +4,7 @@ import React from "react";
 
 const Public = () => {
   const content = (
-    <section>
+    <>
       <header>
         <h1>Welcome to my website</h1>
       </header>
@@ -14,12 +14,11 @@ const Public = () => {
           developer. I have used React, Node, Express, and MongoDB to create
           this website.
         </p>
+        <div>
+          <Link to={"/dash"}>Go to main App</Link>
+        </div>
       </main>
-      <footer>
-        <Link to="/login">Login Page</Link>
-        <Link to="dash/users/new">Dont have an account?</Link>
-      </footer>
-    </section>
+    </>
   );
   return content;
 };

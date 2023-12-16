@@ -78,11 +78,6 @@ const deleteUser = asyncHandler(async (req, res) => {
   if (!id) {
     return res.status(400).json({ message: "User ID Required" });
   }
-  const note = await Note.findOne({ user: id }).lean().exec();
-
-  if (note) {
-    return res.status(400).json({ message: "User has assigned notes" });
-  }
 
   const user = await User.findByIdAndDelete(id).exec();
   if (!user) {
