@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../config/roles";
 
 const USER_REGEX = /^[a-zA-Z0-9]{3,30}$/;
-const PASSWORD_REGEX = /^[a-zA-Z0-9!@#$%^&*]{6,30}$/;
+const PASSWORD_REGEX =
+  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
 const EditUserForm = ({ user }) => {
   const [updateUser, { isSuccess, isError, error }] = useUpdateUserMutation();
@@ -185,6 +186,7 @@ const EditUserForm = ({ user }) => {
                 className="form btn btn-primary btn-block"
                 title="Update"
                 onClick={onSaveUserClicked}
+                disabled={!validUsername || !validPassword}
               >
                 Update
               </button>

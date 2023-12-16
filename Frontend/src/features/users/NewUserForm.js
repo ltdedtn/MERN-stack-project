@@ -3,8 +3,9 @@ import { useAddNewUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../config/roles";
 
-const USER_REGEX = /^[a-zA-Z0-9]{3,30}$/;
-const PASSWORD_REGEX = /^[a-zA-Z0-9!@#$%^&*]{6,30}$/;
+const USER_REGEX = /^[a-zA-Z0-9]{5,30}$/;
+const PASSWORD_REGEX =
+  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
 const NewUserForm = () => {
   const [addNewUser, { isLoading, isSuccess, isError, error }] =
@@ -47,16 +48,20 @@ const NewUserForm = () => {
 
   const onSaveUserClicked = async (e) => {
     e.preventDefault();
-    if (canSave) await addNewUser({ username, password, roles });
+    if (canSave && validUsername && validPassword) {
+      await addNewUser({ username, password, roles });
+    }
   };
 
-  const options = Object.values(ROLES).map((role) => {
-    return (
-      <option key={role} value={role}>
-        {role}
-      </option>
-    );
-  });
+  const options = Array.isArray(ROLES)
+    ? Object.values(ROLES).map((role) => {
+        return (
+          <option key={role} value={role}>
+            {role}
+          </option>
+        );
+      })
+    : [];
 
   const errClass = isError ? "errmsg" : "offscreen";
   const validUserClass = !validUsername ? "form__input--incomplete" : "";

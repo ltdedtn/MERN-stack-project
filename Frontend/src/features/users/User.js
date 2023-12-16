@@ -26,7 +26,7 @@ const User = ({ userId }) => {
 
     const userRolesString = user.roles.toString().replaceAll(",", ", ");
 
-    const cellStatus = user.active ? "" : "table__cell--inactive";
+    const cellStatus = user.active ? "" : "bg-base-200";
 
     return (
       <tr key={user.id} className="table__row user">
