@@ -30,22 +30,15 @@ const UsersList = () => {
       : null;
 
     content = (
-      <div className="overflow-x-auto">
-        <table className="table">
-          <thead className="">
+      <div className="overflow-x-auto grid grid-cols-5 gap-4 ">
+        <div></div>
+        <table className="table col-span-3">
+          <thead>
             <tr>
-              <th scope="col" className="">
-                Username
-              </th>
-              <th scope="col" className="">
-                Roles
-              </th>
-              <th scope="col" className="">
-                Edit
-              </th>
-              <th scope="col" className="">
-                Delete
-              </th>
+              <th>Username</th>
+              <th>Roles</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>{tableContent}</tbody>
